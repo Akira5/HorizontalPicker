@@ -3,6 +3,8 @@ package travel.ithaka.android.horizontalpickerlib;
 import android.content.Context;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.DisplayMetrics;
 import android.view.View;
 
 /**
@@ -75,6 +77,14 @@ public class PickerLayoutManager extends LinearLayoutManager {
                 onScrollStopListener.selectedView(getChildAt(selected));
             }
         }
+    }
+
+    @Override
+    public void onAttachedToWindow(final RecyclerView view) {
+        super.onAttachedToWindow(view);
+        final DisplayMetrics displayMetrics = view.getContext().getResources().getDisplayMetrics();
+        final int screenWidth = displayMetrics.widthPixels;
+        view.setPadding(screenWidth / 2, 0, screenWidth / 2, 0);
     }
 
     public float getScaleDownBy() {
